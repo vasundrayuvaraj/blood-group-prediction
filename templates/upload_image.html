@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Blood Group{% endblock %}
+
+{% block content %}
+<div class="predict">
+    <h1 class="predict_heading">Predict Your Blood Group</h1>
+    <div class="form-container">
+        <!-- Form for uploading the image -->
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+            <label for="file" class="form-label">Upload Image</label>
+            <input type="file" id="file" class="form-input" name="file" accept="image/*" required>
+            <button type="submit" class="form-button">Predict</button>
+        </form>
+    </div>
+
+    <!-- Displaying messages if any -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Displaying the uploaded image if available -->
+    {% if uploaded_image_url %}
+        <div class="uploaded-image">
+            <img src="{{ uploaded_image_url }}" alt="Uploaded Image" width="300">
+        </div>
+    {% endif %}
+
+    <!-- Displaying the prediction result if available -->
+    {% if prediction_result %}
+        <div class="prediction-output">
+            <h3>Predicted Blood Group: {{ prediction_result }}</h3>
+        </div>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

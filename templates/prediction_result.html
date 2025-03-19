@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h1>Blood Group Prediction</h1>
+
+    {% if blood_group %}
+        <h2>Predicted Blood Group: {{ blood_group }}</h2>
+    {% endif %}
+
+    {% if nutrition %}
+        <h3>Nutrition Recommendations:</h3>
+
+        <h4>Foods to Take:</h4>
+        <ul>
+            {% for food in nutrition['foods_to_take'] %}
+                <li>{{ food }}</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Foods to Avoid:</h4>
+        <ul>
+            {% for food in nutrition['foods_to_avoid'] %}
+                <li>{{ food }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <br>
+    <a href="/predict">Go Back</a>
+</body>
+</html>
